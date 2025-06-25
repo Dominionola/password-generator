@@ -50,3 +50,33 @@ checkboxes.forEach((checkbox) => {
 
 // Initial check on page load
 checkStrengthConditions();
+
+const generatePassword = () => {
+  let characterstoUse = "";
+
+  if (incUppercase.checked) {
+    characterstoUse += uppercase;
+  }
+  if (incLowercase.checked) {
+    characterstoUse += lowercase;
+  }
+  if (incNumbers.checked) {
+    characterstoUse += numbers;
+  }
+  if (incSymbols.checked) {
+    characterstoUse += symbols;
+  }
+
+  let passwordValue = "";
+
+  for (let i = 0; i < lenghtPass.value; i++) {
+    randomIndex = Math.floor(Math.random() * characterstoUse.length);
+    passwordValue += characterstoUse.charAt(randomIndex);
+  }
+
+  password.value = passwordValue;
+};
+
+genPass.addEventListener("click", () => {
+  generatePassword();
+});
