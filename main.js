@@ -13,6 +13,8 @@ const genPass = document.getElementById("generate");
 const warning = document.getElementById("strength-warning");
 const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
+const copyError = document.getElementById("copy-error");
+
 // Update length number display
 lenghtPassNum.innerText = lenghtPass.value;
 
@@ -79,4 +81,22 @@ const generatePassword = () => {
 
 genPass.addEventListener("click", () => {
   generatePassword();
+});
+
+copyGenPass.addEventListener("click", () => {
+  if (password.value.length <= 0) {
+    copyError.classList.remove("hidden");
+
+    setTimeout(() => {
+      copyError.classList.add("hidden");
+    }, 3000);
+    return;
+  }
+
+  navigator.clipboard.writeText(password.value);
+  const originalText = copyGenPass.innerText;
+  copyGenPass.innerText = "COPIED!";
+  setTimeout(() => {
+    copyGenPass.innerText = originalText;
+  }, 2000);
 });
